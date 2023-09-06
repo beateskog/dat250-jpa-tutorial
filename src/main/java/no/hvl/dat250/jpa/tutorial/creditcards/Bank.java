@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
 
+
 @Entity
 public class Bank {
     @Id
@@ -13,7 +14,7 @@ public class Bank {
     private String name;
 
     @OneToMany(mappedBy = "bank")
-    private final Collection<CreditCard> ownedCards = new ArrayList<>();
+    private Collection<CreditCard> ownedCards = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -28,7 +29,7 @@ public class Bank {
     }
     
     public void addCard(CreditCard card) {
-        ownedCards.add(card);
+        this.ownedCards.add(card);
     }
 
     public Collection<CreditCard> getOwnedCards() {

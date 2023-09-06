@@ -2,7 +2,9 @@ package no.hvl.dat250.jpa.tutorial.creditcards;
 
 import java.util.ArrayList;
 import java.util.Collection;
+
 import jakarta.persistence.*;
+
 
 @Entity
 public class Customer {
@@ -12,14 +14,13 @@ public class Customer {
     private String name;
 
     @ManyToMany
-    @JoinTable(name = "customer_address",
-            joinColumns = @JoinColumn(name = "customer_id"),
-            inverseJoinColumns = @JoinColumn(name = "bank_id")
-    )
-    private final Collection<Address> addresses = new ArrayList<>();
+    private Collection<Address> addresses = new ArrayList<>();
 
     @OneToMany
-    private final Collection<CreditCard> creditCards = new ArrayList<>();
+    @JoinTable(name = "customer_creditcard",
+            joinColumns = @JoinColumn(name = "customer_fk"),
+            inverseJoinColumns = @JoinColumn(name = "creditcard_fk"))
+    private Collection<CreditCard> creditCards = new ArrayList<>();
 
     public String getName() {
         return name;
@@ -29,13 +30,12 @@ public class Customer {
         this.name = name;
     }
 
-
     public Collection<Address> getAddresses() {
         return addresses;
     }
 
     public void addAddress(Address address) {
-        addresses.add(address);
+        this.addresses.add(address);
     }
 
     public Collection<CreditCard> getCreditCards() {
@@ -43,7 +43,7 @@ public class Customer {
     }
 
     public void addCreditCard(CreditCard creditCard) {
-        creditCards.add(creditCard);
+        this.creditCards.add(creditCard);
     }
 
 }

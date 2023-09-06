@@ -56,8 +56,10 @@ public class CreditCardsMain {
 
         card1.setPincode(pin);
         card1.setOwningBank(bank);
+        card1.setOwner(owner);
         card2.setPincode(pin);
         card2.setOwningBank(bank);
+        card2.setOwner(owner);
 
         bank.addCard(card1);
         bank.addCard(card2);

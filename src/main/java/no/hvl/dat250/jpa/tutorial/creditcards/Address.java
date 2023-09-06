@@ -3,7 +3,9 @@ package no.hvl.dat250.jpa.tutorial.creditcards;
 import java.util.ArrayList;
 import java.util.Collection;
 
+
 import jakarta.persistence.*;
+
 
 @Entity
 public class Address {
@@ -14,7 +16,7 @@ public class Address {
     private Integer number;
 
     @ManyToMany(mappedBy = "addresses")
-    private final Collection<Customer> owners = new ArrayList<>();
+    private Collection<Customer> owners = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -35,6 +37,7 @@ public class Address {
     public void setNumber(Integer number) {
         this.number = number;
     }
+
 
     public Collection<Customer> getOwners() {
         return owners;

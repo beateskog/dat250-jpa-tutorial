@@ -1,6 +1,10 @@
 package no.hvl.dat250.jpa.tutorial.creditcards;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import jakarta.persistence.*;
+
 
 @Entity
 public class CreditCard {
@@ -13,16 +17,13 @@ public class CreditCard {
     private Integer creditLimit;
 
     @ManyToOne
-    @JoinColumn(name = "pincode_id")
     private Pincode pincode;
 
     @ManyToOne
-    @JoinTable( 
-        name = "credit_card_bank", 
-        joinColumns = @JoinColumn(name = "credit_card_id"),
-        inverseJoinColumns = @JoinColumn(name = "bank_id")
-    )
     private Bank bank;
+
+    @ManyToMany(mappedBy = "creditCards")
+    private Collection<Customer> cardOwners = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -66,5 +67,13 @@ public class CreditCard {
 
     public void setOwningBank(Bank bank) {
         this.bank = bank;
+    }
+
+    public Collection<Customer> getOwner() {
+        return cardOwners;
+    }
+
+    public void setOwner(Customer customer) {
+        this.cardOwners.add(customer);
     }
 }
