@@ -27,12 +27,11 @@ public class CreditCardsMain {
         Customer owner = new Customer();
         owner.setName("Max Mustermann");
         em.persist(owner);
-
+        
         Address address = new Address();
         address.setStreet("Inndalsveien");
         address.setNumber(28);
-        em.persist(address);
-
+        
         CreditCard card1 = new CreditCard();
         card1.setNumber(12345);
         card1.setBalance(-5000);
@@ -56,10 +55,8 @@ public class CreditCardsMain {
 
         card1.setPincode(pin);
         card1.setOwningBank(bank);
-        card1.setOwner(owner);
         card2.setPincode(pin);
         card2.setOwningBank(bank);
-        card2.setOwner(owner);
 
         bank.getOwnedCards().add(card1);
         bank.getOwnedCards().add(card2);
@@ -69,6 +66,7 @@ public class CreditCardsMain {
         owner.getCreditCards().add(card2);
         
         address.getOwners().add(owner);
+      
     }
   }
 

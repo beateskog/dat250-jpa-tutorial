@@ -4,8 +4,11 @@ import java.util.HashSet;
 import java.util.Set;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
-
+@Getter
+@Setter
 @Entity
 public class CreditCard {
 
@@ -20,62 +23,9 @@ public class CreditCard {
     private Pincode pincode;
 
     @ManyToOne
-    private Bank bank;
+    private Bank owningBank;
 
     @ManyToMany(mappedBy = "creditCards")
     private Set<Customer> cardOwners = new HashSet<>();
-
-    public Long getId() {
-        return id;
-    }
-
-    public Integer getNumber() {
-        return number;
-    }
-
-    public void setNumber(Integer number) {
-        this.number = number;
-    }
-
-    public Integer getBalance() {
-        return balance;
-    }
-
-    public void setBalance(Integer balance) {
-        this.balance = balance;
-    }
-
-    public Integer getCreditLimit() {
-        return creditLimit;
-    }
-
-    public void setCreditLimit(Integer limit) {
-        this.creditLimit = limit;
-    }
-
-    public Pincode getPincode() {
-        return pincode;
-    }
-
-    public void setPincode(Pincode pincode) {
-        this.pincode = pincode;
-    }
-
-    public Bank getOwningBank() {
-        return bank;
-    }
-
-    public void setOwningBank(Bank bank) {
-        this.bank = bank;
-    }
-
-    @CollectionTable
-    public Set<Customer> getOwner() {   
-        return cardOwners;
-    }
-
-    public void setOwner(Customer customer) {
-        this.cardOwners.add(customer);
-    }
 
 }

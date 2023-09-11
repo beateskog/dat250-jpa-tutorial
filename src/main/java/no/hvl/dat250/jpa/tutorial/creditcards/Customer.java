@@ -1,11 +1,16 @@
+
+
 package no.hvl.dat250.jpa.tutorial.creditcards;
 
 import java.util.HashSet;
 import java.util.Set;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
-
+@Getter
+@Setter
 @Entity
 public class Customer {
     @Id
@@ -21,31 +26,5 @@ public class Customer {
             joinColumns = @JoinColumn(name = "customer_id"),
             inverseJoinColumns = @JoinColumn(name = "creditcard_id"))
     private Set<CreditCard> creditCards = new HashSet<>();
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    @CollectionTable
-    public Set<Address> getAddresses() {
-        return addresses;
-    }
-
-    public void addAddress(Address address) {
-        this.addresses.add(address);
-    }
-
-    public Set<CreditCard> getCreditCards() {
-        return creditCards;
-    }
-
-    public void addCreditCard(CreditCard creditCard) {
-        this.creditCards.add(creditCard);
-    }
-
-
+   
 }
