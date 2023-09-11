@@ -1,7 +1,7 @@
 package no.hvl.dat250.jpa.tutorial.creditcards;
 
-import java.util.ArrayList;
-import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 import jakarta.persistence.*;
 
@@ -13,14 +13,14 @@ public class Customer {
     private Long id;
     private String name;
 
-    @ManyToMany
-    private Collection<Address> addresses = new ArrayList<>();
+    @ManyToMany(cascade = CascadeType.PERSIST)
+    private Set<Address> addresses = new HashSet<>();
 
     @OneToMany
     @JoinTable(name = "customer_creditcard",
-            joinColumns = @JoinColumn(name = "customer_fk"),
-            inverseJoinColumns = @JoinColumn(name = "creditcard_fk"))
-    private Collection<CreditCard> creditCards = new ArrayList<>();
+            joinColumns = @JoinColumn(name = "customer_id"),
+            inverseJoinColumns = @JoinColumn(name = "creditcard_id"))
+    private Set<CreditCard> creditCards = new HashSet<>();
 
     public String getName() {
         return name;
@@ -30,7 +30,8 @@ public class Customer {
         this.name = name;
     }
 
-    public Collection<Address> getAddresses() {
+    @CollectionTable
+    public Set<Address> getAddresses() {
         return addresses;
     }
 
@@ -38,12 +39,13 @@ public class Customer {
         this.addresses.add(address);
     }
 
-    public Collection<CreditCard> getCreditCards() {
+    public Set<CreditCard> getCreditCards() {
         return creditCards;
     }
 
     public void addCreditCard(CreditCard creditCard) {
         this.creditCards.add(creditCard);
     }
+
 
 }

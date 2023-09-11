@@ -61,14 +61,14 @@ public class CreditCardsMain {
         card2.setOwningBank(bank);
         card2.setOwner(owner);
 
-        bank.addCard(card1);
-        bank.addCard(card2);
+        bank.getOwnedCards().add(card1);
+        bank.getOwnedCards().add(card2);
 
-        owner.addAddress(address);
-        owner.addCreditCard(card1);
-        owner.addCreditCard(card2);
+        owner.getAddresses().add(address);
+        owner.getCreditCards().add(card1);
+        owner.getCreditCards().add(card2);
         
-        address.addOwner(owner);
+        address.getOwners().add(owner);
     }
   }
 

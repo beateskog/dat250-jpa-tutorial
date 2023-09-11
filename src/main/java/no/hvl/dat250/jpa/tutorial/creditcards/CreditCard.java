@@ -1,7 +1,7 @@
 package no.hvl.dat250.jpa.tutorial.creditcards;
 
-import java.util.ArrayList;
-import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 import jakarta.persistence.*;
 
@@ -23,7 +23,7 @@ public class CreditCard {
     private Bank bank;
 
     @ManyToMany(mappedBy = "creditCards")
-    private Collection<Customer> cardOwners = new ArrayList<>();
+    private Set<Customer> cardOwners = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -69,11 +69,13 @@ public class CreditCard {
         this.bank = bank;
     }
 
-    public Collection<Customer> getOwner() {
+    @CollectionTable
+    public Set<Customer> getOwner() {   
         return cardOwners;
     }
 
     public void setOwner(Customer customer) {
         this.cardOwners.add(customer);
     }
+
 }
